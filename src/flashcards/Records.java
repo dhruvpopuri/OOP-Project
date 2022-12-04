@@ -8,6 +8,12 @@ public class Records implements java.io.Serializable{
     private ArrayList<Card> cards;
     private ArrayList<Deck> decks;
 
+    Records() {
+        categories = new ArrayList<Category>();
+        cards = new ArrayList<Card>();
+        decks = new ArrayList<Deck>();
+    }
+
     public void addCategory(Category category) {
         this.categories.add(category);
     }
