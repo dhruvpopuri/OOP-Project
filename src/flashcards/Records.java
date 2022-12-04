@@ -23,13 +23,15 @@ public class Records implements java.io.Serializable{
     }
 
     public void deleteCard(Card card) {
+        // Also check if user is the owner
+        
         int index = this.cards.indexOf(card);
         if(index != -1) {
             cards.remove(index);
         } // Else throw exception
 
         // Deleting the card from all the decks as well!
-        
+
         for(Deck deck: decks) {
             deck.deleteCard(card);
         }

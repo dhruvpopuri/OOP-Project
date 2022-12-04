@@ -29,6 +29,8 @@ public class Deck implements java.io.Serializable {
     }
 
     public void deleteCard(Card card) {
+        // Also check if user is the owner
+        
         int index = cards.indexOf(card);
         if(index != -1){
             cards.remove(index);
