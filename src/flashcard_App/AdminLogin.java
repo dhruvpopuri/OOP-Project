@@ -6,18 +6,14 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class AdminLogin {
-	
 
-	private final JFrame frame;
 	private final JTextField textField;
 	private final JPasswordField passwordField;
 	
 	public AdminLogin() {
-		frame = new JFrame("Admin Login");
+		JFrame frame = new JFrame("Admin Login");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		frame.setSize(400, 500);
@@ -41,15 +37,13 @@ public class AdminLogin {
 		frame.getContentPane().add(passwordField);
 		
 		JButton btnNewButton = new JButton("Login");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent actionEvent) {
-				try {
-					String username = textField.getText();
-					String password = String.valueOf(passwordField.getPassword());
-					if (username.equals("admin") && password.equals("5678")) new HomeScreen();
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-				}
+		btnNewButton.addActionListener(actionEvent -> {
+			try {
+				String username = textField.getText();
+				String password = String.valueOf(passwordField.getPassword());
+				if (username.equals("admin") && password.equals("5678")) new HomeScreen();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
 		});
 		btnNewButton.setBounds(140, 355, 85, 21);
@@ -60,7 +54,5 @@ public class AdminLogin {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		SwingUtilities.invokeLater(AdminLogin::new);
-		
 	}
-
 }

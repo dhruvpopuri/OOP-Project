@@ -6,10 +6,8 @@ import javax.swing.SwingUtilities;
 
 public class StartScreen {
 
-	private final JFrame signIn;
-	
 	public StartScreen() {
-		signIn = new JFrame("Flash Card");
+		JFrame signIn = new JFrame("Flash Card");
 		signIn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		signIn.setSize(400, 500);
 		signIn.getContentPane().setLayout(null);
