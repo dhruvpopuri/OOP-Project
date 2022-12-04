@@ -3,6 +3,7 @@ package flashcards;
 import java.util.ArrayList;
 
 import flashcards.cards.Card;
+import flashcards.InvalidUserException;
 
 public class Deck implements java.io.Serializable {
     private String name;
@@ -28,15 +29,17 @@ public class Deck implements java.io.Serializable {
         return this.cards;
     }
 
-    public void deleteCard(Card card) {
-        // Also check if user is the owner
-        
-        int index = cards.indexOf(card);
-        if(index != -1){
-            cards.remove(index);
+    public void deleteCard(Card card, User user) throws InvalidUserException {
+        if(owner.equals(user) || card.getCreator().equals(user)) {
+            int index = cards.indexOf(card);
+            if(index != -1){
+                cards.remove(index);
+            } else {
+                // Throw exception
+                System.out.println("Card does not exist");
+            }
         } else {
-            // Throw exception
-            System.out.println("Card does not exist");
+            throw new InvalidUserException("Only the creator of the card or the owner of the deck can delete it");
         }
     }
 }

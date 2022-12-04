@@ -46,5 +46,5 @@ class testDriver {
  * 5) Finish getData method -> displayQuestion DONE
  * 6) Implement deck class -> DONE
  * 6) get deck of cards which returns arraylist of cards -> DONE
- * 7) Exceptions
+ * 7) Exceptions -> Done for invalid user access
  */

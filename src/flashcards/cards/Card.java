@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import flashcards.CardInterface;
 import flashcards.Category;
+import flashcards.InvalidUserException;
 import flashcards.User;
 import flashcards.Records;
 
@@ -39,11 +40,16 @@ public class Card implements CardInterface, java.io.Serializable {
     //     // Will implement soon!
     // }
 
-    public void makeCardPublic(User user, boolean publicStatus) {
+    public void makeCardPublic(User user, boolean publicStatus) throws InvalidUserException {
         if(user.equals(this.createdByUser)) {
             this.isPublic = publicStatus;
+        } else {
+            throw new InvalidUserException("Only the owner of the card can make it public");
         }
-        // Throw permission error when different user tries to do it
+    }
+
+    public User getCreator() {
+        return this.createdByUser;
     }
 
     public int getCurrentTrainingInterval() {

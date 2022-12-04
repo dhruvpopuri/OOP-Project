@@ -22,9 +22,9 @@ public class Records implements java.io.Serializable{
         this.cards.add(card);
     }
 
-    public void deleteCard(Card card) {
+    public void deleteCard(Card card, User user) throws InvalidUserException {
         // Also check if user is the owner
-        
+
         int index = this.cards.indexOf(card);
         if(index != -1) {
             cards.remove(index);
@@ -33,10 +33,9 @@ public class Records implements java.io.Serializable{
         // Deleting the card from all the decks as well!
 
         for(Deck deck: decks) {
-            deck.deleteCard(card);
+            deck.deleteCard(card, user);
         }
     }
-
     public void addDeck(Deck deck) {
         this.decks.add(deck);
     }
