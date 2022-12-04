@@ -25,4 +25,9 @@ public class trueFalse extends Card {
 
         return hs;
     }
+
+    public void editCard(String questionText, boolean answer) {
+        this.question = questionText;
+        this.correctAnswer = answer;
+    }
 }

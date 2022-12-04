@@ -34,4 +34,8 @@ public class Category implements java.io.Serializable{
 
         return this.publicCards;
     }
+
+    public void deleteCard(Card card) {
+        // To delete from the records -> cards and records -> decks
+    }
 }

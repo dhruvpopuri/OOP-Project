@@ -25,4 +25,9 @@ public class fillInTheBlank extends Card {
 
         return hs;
     }
+
+    public void editCard(String questionText, String answerText) {
+        this.question = questionText;
+        this.correctAnswer = answerText;
+    }
 }
