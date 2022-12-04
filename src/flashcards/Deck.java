@@ -27,4 +27,14 @@ public class Deck implements java.io.Serializable {
     public ArrayList<Card> getCards() {
         return this.cards;
     }
+
+    public void deleteCard(Card card) {
+        int index = cards.indexOf(card);
+        if(index != -1){
+            cards.remove(index);
+        } else {
+            // Throw exception
+            System.out.println("Card does not exist");
+        }
+    }
 }

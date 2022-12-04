@@ -22,6 +22,19 @@ public class Records implements java.io.Serializable{
         this.cards.add(card);
     }
 
+    public void deleteCard(Card card) {
+        int index = this.cards.indexOf(card);
+        if(index != -1) {
+            cards.remove(index);
+        } // Else throw exception
+
+        // Deleting the card from all the decks as well!
+        
+        for(Deck deck: decks) {
+            deck.deleteCard(card);
+        }
+    }
+
     public void addDeck(Deck deck) {
         this.decks.add(deck);
     }
