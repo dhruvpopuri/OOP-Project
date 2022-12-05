@@ -33,8 +33,13 @@ public class multipleChoice extends Card {
         HashMap<String, String> hs = new HashMap<String, String>();
         hs.put("question", this.question);
         hs.put("correctAnswer", this.correctAnswer);
-        // TO DO: choices display
-    
+        
+        int choice_index = 1;
+        for(String choice: this.choices) {
+            hs.put("Choice " + Integer.toString(choice_index), choice);
+        }
+
+        hs.put("currentTimeInterval", Integer.toString(super.getCurrentTrainingInterval())); // For the frontend to decide how long to show the card, currently stored as a string
         return hs;
     }
 
