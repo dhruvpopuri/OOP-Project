@@ -6,11 +6,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class CreateCategory {
-	private final JFrame frame;
-	private final JTextField textField;
 	
 	public CreateCategory() {
-		frame = new JFrame("Create Category");
+		JFrame frame = new JFrame("Create Category");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		frame.setSize(400, 500);
@@ -20,7 +18,7 @@ public class CreateCategory {
 		lblNewLabel.setBounds(32, 51, 112, 13);
 		frame.getContentPane().add(lblNewLabel);
 		
-		textField = new JTextField();
+		JTextField textField = new JTextField();
 		textField.setBounds(32, 136, 293, 65);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
@@ -28,12 +26,7 @@ public class CreateCategory {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				new CreateCategory();
-			}
-		});
+		SwingUtilities.invokeLater(CreateCategory::new);
 	}
 
 }

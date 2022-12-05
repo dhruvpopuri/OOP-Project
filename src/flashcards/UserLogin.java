@@ -49,12 +49,12 @@ class LoginThread implements Runnable {
 
     public boolean doesUserExist(String username, String password) {
         System.out.println(username + " " + password);
-        File file = new File("src/flashcard_App/users.txt");
+        File file = new File("src/flashcards/users.txt");
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
             while ((line = br.readLine()) != null) {
-                String[] strings = line.split("\\.");
+                String[] strings = line.split(".");
                 if (strings[0].equals(username) && strings[1].equals(password)) {
                     br.close();
                     return true;
@@ -83,11 +83,11 @@ public class UserLogin {
         userLogin.getContentPane().setLayout(null);
 
         JLabel lblNewLabel = new JLabel("UserName");
-        lblNewLabel.setBounds(44, 99, 79, 25);
+        lblNewLabel.setBounds(44, 99, 195, 25);
         userLogin.getContentPane().add(lblNewLabel);
 
         JLabel lblPassword = new JLabel("Password");
-        lblPassword.setBounds(44, 225, 79, 25);
+        lblPassword.setBounds(44, 225, 199, 25);
         userLogin.getContentPane().add(lblPassword);
 
         textField = new JTextField();

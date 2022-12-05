@@ -19,15 +19,15 @@ public class UserSignUp {
         userSignup.getContentPane().setLayout(null);
 
         JLabel lblNewLabel = new JLabel("UserName");
-        lblNewLabel.setBounds(33, 96, 45, 13);
+        lblNewLabel.setBounds(33, 96, 145, 13);
         userSignup.getContentPane().add(lblNewLabel);
 
         JLabel lblEmail = new JLabel("Email");
-        lblEmail.setBounds(33, 168, 45, 13);
+        lblEmail.setBounds(33, 168, 145, 13);
         userSignup.getContentPane().add(lblEmail);
 
         JLabel lblPassword = new JLabel("Password");
-        lblPassword.setBounds(33, 249, 45, 13);
+        lblPassword.setBounds(33, 249, 145, 13);
         userSignup.getContentPane().add(lblPassword);
 
         textField = new JTextField();
@@ -63,7 +63,7 @@ public class UserSignUp {
     }
 
     public void addUser(String username, String password, String email) {
-        File file = new File("src/flashcard_App/users.txt");
+        File file = new File("src/flashcards/users.txt");
         try {
             PrintWriter pw = new PrintWriter(new FileWriter(file, true));
             pw.append(username).append(".").append(password).append(".").append(email).append('\n');

@@ -13,17 +13,20 @@ public class StartScreen {
 		signIn.getContentPane().setLayout(null);
 		
 		JButton LoginButton = new JButton("User Login");
-		LoginButton.addActionListener(e -> new UserLogin());
+		LoginButton.addActionListener(e -> {new UserLogin();
+		signIn.setVisible(false);});
 		LoginButton.setBounds(130, 122, 110, 34);
 		signIn.getContentPane().add(LoginButton);
 		
 		JButton SignUpButton = new JButton("User SignUp");
-		SignUpButton.addActionListener(e -> new UserSignUp());
+		SignUpButton.addActionListener(e -> {new UserSignUp();
+		signIn.setVisible(false);});
 		SignUpButton.setBounds(130, 196, 110, 34);
 		signIn.getContentPane().add(SignUpButton);
 		
 		JButton AdminButton = new JButton("Admin Login");
-		AdminButton.addActionListener(e -> new AdminLogin());
+		AdminButton.addActionListener(e -> {new AdminLogin(); 
+		signIn.setVisible(false);});
 		AdminButton.setBounds(130, 268, 110, 34);
 		signIn.getContentPane().add(AdminButton);
 		signIn.setVisible(true);

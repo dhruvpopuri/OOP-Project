@@ -43,6 +43,7 @@ public class FlashCardBuilder {
 		scrollpane_question.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		JButton nextButton = new JButton("Next Card");
+		JButton homeButton = new JButton("Home");
 		
 		cardList = new ArrayList<Card>();
 		
@@ -55,19 +56,18 @@ public class FlashCardBuilder {
 		mainPanel.add(alabel);
 		mainPanel.add(scrollpane);
 		mainPanel.add(nextButton);
+		mainPanel.add(homeButton);
 		nextButton.addActionListener(new NextCardListener(cardList, question, answer));
 		
 		JMenuBar menuBar = new JMenuBar();
 		JMenu cardMenu = new JMenu("Cards");
 
-		JMenu homeMenu = new JMenu("Home");
 		JMenuItem newMenuItem = new JMenuItem("New");
 		JMenuItem saveMenuItem = new JMenuItem("Save");
 		
 		cardMenu.add(newMenuItem);
 		cardMenu.add(saveMenuItem);
 
-		menuBar.add(homeMenu);
 		menuBar.add(cardMenu);
 		frame.setJMenuBar(menuBar);
 		
