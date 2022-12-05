@@ -7,11 +7,13 @@ public class Records implements java.io.Serializable {
     private ArrayList<Category> categories;
     private ArrayList<Card> cards;
     private ArrayList<Deck> decks;
+    private ArrayList<User> users;
 
     Records() {
         categories = new ArrayList<Category>();
         cards = new ArrayList<Card>();
         decks = new ArrayList<Deck>();
+        users = new ArrayList<User>();
     }
 
     public void addCategory(Category category) {
@@ -20,6 +22,10 @@ public class Records implements java.io.Serializable {
 
     public void addCard(Card card) {
         this.cards.add(card);
+    }
+
+    public void addUser(User user) {
+        this.users.add(user);
     }
 
     public void deleteCard(Card card, User user) throws InvalidUserException {

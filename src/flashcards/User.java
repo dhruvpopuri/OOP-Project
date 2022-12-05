@@ -14,12 +14,13 @@ public class User implements java.io.Serializable {
     private ArrayList<Deck> decks;
 
 
-    public User(String email, String password, int id) {
+    public User(String email, String password, int id, Records records) {
         this.email = email;
         this.password = password;
         this.id = id;
         cardsOwnedByUser = new ArrayList<>();
         cardsPerDay = new HashMap<>();
+        records.addUser(this);
     }
 
     // public void createCategory(String categoryName){}
