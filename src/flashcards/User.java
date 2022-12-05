@@ -62,4 +62,8 @@ public class User implements java.io.Serializable {
     public HashMap<String, Integer> getNumCardsSeenPerDay() {
         return this.numCardsSeenPerDay;
     }
+
+    public ArrayList<Deck> getUserDecks() {
+        return this.decks;
+    }
 }
