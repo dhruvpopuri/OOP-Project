@@ -17,18 +17,24 @@ public class HomeScreen {
 		
 		JButton btnNewButton = new JButton("Create New Card");
 		btnNewButton.addActionListener(e -> {
+			FlashCardBuilder f = new FlashCardBuilder();
+			f.setVisible(true);
 		});
 		btnNewButton.setBounds(106, 131, 164, 33);
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Start Revision");
 		btnNewButton_1.addActionListener(e -> {
+			Revision f = new Revision();
+			f.setVisible(true);
 		});
 		btnNewButton_1.setBounds(106, 217, 164, 33);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Create new Category");
 		btnNewButton_2.addActionListener(e -> {
+			CreateCategory f = new CreateCategory();
+			f.setVisible(true);
 		});
 		btnNewButton_2.setBounds(106, 304, 164, 33);
 		frame.getContentPane().add(btnNewButton_2);
