@@ -23,6 +23,8 @@ public class oneWord extends Card {
         hs.put("question", this.question);
         hs.put("correctAnswer", this.correctAnswer);
 
+        hs.put("currentTimeInterval", Integer.toString(super.getCurrentTrainingInterval()));
+
         return hs;
     }
 

@@ -23,6 +23,8 @@ public class trueFalse extends Card {
         hs.put("question", this.question);
         hs.put("correctAnswer", Boolean.toString(this.correctAnswer));
 
+        hs.put("currentTimeInterval", Integer.toString(super.getCurrentTrainingInterval()));
+
         return hs;
     }
 
