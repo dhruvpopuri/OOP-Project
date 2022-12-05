@@ -1,4 +1,4 @@
-package flashcard_App;
+package flashcards;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;

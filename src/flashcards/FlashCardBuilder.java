@@ -1,4 +1,4 @@
-package flashcard_App;
+package flashcards;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.util.ArrayList;
