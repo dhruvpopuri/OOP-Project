@@ -4,13 +4,14 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import flashcards.cards.Card;
 
 
 public class FlashCardBuilder {
 	
 	private final JTextArea question;
 	private final JTextArea answer;
-	private final ArrayList<FlashCard> cardList;
+	private final ArrayList<Card> cardList;
 	private final JFrame frame;
 	
 	
@@ -43,7 +44,7 @@ public class FlashCardBuilder {
 		
 		JButton nextButton = new JButton("Next Card");
 		
-		cardList = new ArrayList<FlashCard>();
+		cardList = new ArrayList<Card>();
 		
 		JLabel qlabel = new JLabel("Question");
 		JLabel alabel = new JLabel("Answer");

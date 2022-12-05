@@ -5,13 +5,14 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JTextArea;
+import flashcards.cards.Card;
 
 public class NextCardListener implements ActionListener {
 	
 	private final JTextArea question;
 	private final JTextArea answer;
-	private final ArrayList<FlashCard> cardList;
-	public NextCardListener(ArrayList<FlashCard> cardList, JTextArea question, JTextArea answer) {
+	private final ArrayList<Card> cardList;
+	public NextCardListener(ArrayList<Card> cardList, JTextArea question, JTextArea answer) {
 		this.cardList = cardList;
 		this.question = question;
 		this.answer = answer;
@@ -20,8 +21,9 @@ public class NextCardListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println("Button Clicked");
-		FlashCard card = new FlashCard();
-		cardList.add(card);
+		//  TO DO Call constructor with appropriate arguments
+		// Card card = new Card();
+		// c:ardList.add(card);
 		clearCard();
 	}
 
