@@ -17,7 +17,7 @@ public class User implements java.io.Serializable {
     Records records = startScreen.records;
 
 
-    public User(String email, String password, int id) {
+    public User(String email, String password, int id, Records records) {
         this.email = email;
         this.password = password;
         this.id = id;
