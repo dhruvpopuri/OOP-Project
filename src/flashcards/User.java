@@ -73,11 +73,9 @@ public class User implements java.io.Serializable {
     }
 
     public CardInterface nextCard(Date now, int categoryID) {
-
     }
 
     public void startRevision() {
-
     }
 
     public HashMap<String, String> attemptCard(Card card) {
