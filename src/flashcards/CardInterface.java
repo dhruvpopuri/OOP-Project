@@ -6,4 +6,5 @@ public interface CardInterface {
     // boolean attemptCard(String attemptedAnswer); // Method by which the learner attempts the question
     void makeCardPublic(User user, boolean publicStatus) throws InvalidUserException;
     int getCurrentTrainingInterval();
+    int getCard_id();
 }

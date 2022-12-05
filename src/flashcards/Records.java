@@ -5,13 +5,15 @@ import flashcards.cards.Card;
 
 public class Records implements java.io.Serializable {
     private ArrayList<Category> categories;
-    private ArrayList<Card> cards;
+    public ArrayList<Card> cards;
     private ArrayList<Deck> decks;
+    private ArrayList<User> users;
 
     Records() {
         categories = new ArrayList<Category>();
         cards = new ArrayList<Card>();
         decks = new ArrayList<Deck>();
+        users = new ArrayList<User>();
     }
 
     public void addCategory(Category category) {
@@ -22,11 +24,15 @@ public class Records implements java.io.Serializable {
         this.cards.add(card);
     }
 
+    public void addUser(User user) {
+        this.users.add(user);
+    }
+
     public void deleteCard(Card card, User user) throws InvalidUserException {
         if(card.getCreator().equals(user)){
             int index = this.cards.indexOf(card);
             if(index != -1) {
-            cards.remove(index);
+                cards.remove(index);
             } // Else throw exception
 
             // Deleting the card from all the decks as well!
@@ -43,4 +49,11 @@ public class Records implements java.io.Serializable {
         this.decks.add(deck);
     }
 
+    public Category getCategory(int categoryId) {
+        Category _category = null;
+        for (Category category: categories) {
+            if(category.category_id == categoryId) _category = category;
+        }
+        return _category;
+    }
 }

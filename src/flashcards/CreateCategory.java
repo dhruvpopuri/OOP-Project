@@ -24,6 +24,7 @@ public class CreateCategory {
 		textField.setBounds(32, 136, 293, 65);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
+		frame.setVisible(true);
 	}
 
 	public static void main(String[] args) {
