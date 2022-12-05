@@ -18,6 +18,7 @@ public class HomeScreen {
 		
 		JButton btnNewButton = new JButton("Create New Card");
 		btnNewButton.addActionListener(e -> { new FlashCardBuilder();
+			frame.setVisible(false);
 		});
 		btnNewButton.setBounds(106, 131, 164, 33);
 		frame.getContentPane().add(btnNewButton);

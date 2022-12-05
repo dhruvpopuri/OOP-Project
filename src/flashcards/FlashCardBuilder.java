@@ -58,6 +58,8 @@ public class FlashCardBuilder {
 		mainPanel.add(nextButton);
 		mainPanel.add(homeButton);
 		nextButton.addActionListener(new NextCardListener(cardList, question, answer));
+		homeButton.addActionListener(e -> {frame.setVisible(false);
+		new HomeScreen();});
 		
 		JMenuBar menuBar = new JMenuBar();
 		JMenu cardMenu = new JMenu("Cards");
