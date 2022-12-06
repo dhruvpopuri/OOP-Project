@@ -4,9 +4,19 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.awt.event.ActionEvent;
 
 public class CreateCategory {
 	
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public CreateCategory() {
 		JFrame frame = new JFrame("Create Category");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -22,11 +32,52 @@ public class CreateCategory {
 		textField.setBounds(32, 136, 293, 65);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Home");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				new HomeScreen();
+			}
+		});
+		btnNewButton.setBounds(59, 280, 85, 21);
+		frame.getContentPane().add(btnNewButton);
+		
+		JButton btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String category = textField.getText();
+					addCategory(category);
+					frame.setVisible(false);
+					new HomeScreen();
+				} catch (Exception e2) {
+					System.out.println(e2.getMessage());
+				}
+			}
+		});
+		btnSave.setBounds(220, 280, 85, 21);
+		frame.getContentPane().add(btnSave);
+		frame.setVisible(true);
 	}
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		SwingUtilities.invokeLater(CreateCategory::new);
 	}
+
+	public void addCategory(String category) {
+        File file = new File("src/flashcards/categories.txt");
+        try {
+            PrintWriter pw = new PrintWriter(new FileWriter(file, true));
+            pw.append(category).append('\n');
+            pw.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
