@@ -7,6 +7,9 @@ import javax.swing.*;
 import flashcards.cards.Card;
 import flashcards.cards.CardType;
 import flashcards.cards.fillInTheBlank;
+import flashcards.cards.multipleChoice;
+import flashcards.cards.oneWord;
+import flashcards.cards.trueFalse;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -53,6 +56,12 @@ public class FlashCardBuilder {
 		scrollpane_question.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 		scrollpane_question.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+		JLabel qlabel = new JLabel("Question");
+		qlabel.setBounds(153, 10, 91, 13);
+		JLabel alabel = new JLabel("Answer");
+		alabel.setBounds(153, 190, 80, 13);
+		mainPanel.setLayout(null);
 		
 		JButton nextButton = new JButton("Save Card");
 		nextButton.addActionListener(new ActionListener() {
@@ -62,24 +71,22 @@ public class FlashCardBuilder {
 				// TODO Auto-generated method stub
 				Category category = new Category(selectedValue, records.getSessions().getCurrentLoggedInUser(), records);
 				if(selectedValue.equals(new String("Fill in the blanks"))){
-					Card card = new Card(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, CardType.FILL_IN_THE_BLANKS, records);
+					Card card = new fillInTheBlank("flashcard", records.getSessions().getCurrentLoggedInUser(), false, category, qlabel.getText(), alabel.getText(), records);
 					deck.addCard(card);
 
 				}
 				else if(selectedValue.equals(new String("Multiple choice"))){
-					Card card = new Card(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, CardType.MULTIPLE_CHOICE, records);
+					Card card = new multipleChoice("flashcard", records.getSessions().getCurrentLoggedInUser(), false, category, qlabel.getText(), alabel.getText(), records);
 					deck.addCard(card);
 
 				}
 				else if(selectedValue.equals(new String("One Word"))){
-					Card card = new Card(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, CardType.ONE_WORD, records);
-					deck.addCard(card);
+					Card card = new oneWord("flashcard", records.getSessions().getCurrentLoggedInUser(), false, category, qlabel.getText(), alabel.getText(), records);
 
 				}
 				else if(selectedValue.equals(new String("True/False"))){
-					Card card = new Card(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, CardType.TRUE_FALSE, records);
+					Card card = new trueFalse("flashcard", records.getSessions().getCurrentLoggedInUser(), false, category, qlabel.getText(), Boolean.parseBoolean(alabel.getText()), records);
 					deck.addCard(card);
-
 				}
 				
 			}
@@ -99,11 +106,6 @@ public class FlashCardBuilder {
 		
 		cardList = new ArrayList<Card>();
 		
-		JLabel qlabel = new JLabel("Question");
-		qlabel.setBounds(153, 10, 91, 13);
-		JLabel alabel = new JLabel("Answer");
-		alabel.setBounds(153, 190, 80, 13);
-		mainPanel.setLayout(null);
 		
 		
 		mainPanel.add(qlabel);

@@ -21,7 +21,7 @@ public class multipleChoice extends Card {
         this.choices.add(choice);
     }
 
-    multipleChoice(String name, User createdByUser, boolean isPublic, Category category, String question, String correctAnswer, Records records){
+    public multipleChoice(String name, User createdByUser, boolean isPublic, Category category, String question, String correctAnswer, Records records){
         super(name, createdByUser, isPublic, category, CardType.MULTIPLE_CHOICE, records);
         this.question = question;
         this.correctAnswer = correctAnswer;
