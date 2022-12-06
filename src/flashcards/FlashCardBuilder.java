@@ -116,18 +116,6 @@ public class FlashCardBuilder {
 		homeButton.addActionListener(e -> {frame.setVisible(false);
 		new HomeScreen(records);});
 		
-		JMenuBar menuBar = new JMenuBar();
-		JMenu cardMenu = new JMenu("Cards");
-
-		JMenuItem newMenuItem = new JMenuItem("New");
-		JMenuItem saveMenuItem = new JMenuItem("Save");
-		
-		cardMenu.add(newMenuItem);
-		cardMenu.add(saveMenuItem);
-
-		menuBar.add(cardMenu);
-		frame.setJMenuBar(menuBar);
-		
 		
 		frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
 		
