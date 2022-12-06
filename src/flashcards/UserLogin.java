@@ -12,6 +12,8 @@ class LoginThread implements Runnable {
     private final String username;
     private final String password;
     public boolean stopThread = false;
+    
+    public static Records records;
 
     LoginThread(String username, String password) {
         this.username = username;
@@ -38,7 +40,7 @@ class LoginThread implements Runnable {
                     // Display Incorrect Credentials
                     theThread.stop();
                 } else {
-                    new HomeScreen();
+                    new HomeScreen(records);
                     setStopThread(true);
                 }
             } catch (Exception e) {
@@ -74,8 +76,11 @@ public class UserLogin {
     private final JFrame userLogin;
     private final JTextField textField;
     private final JPasswordField passwordField;
+    public static Records records;
 
-    public UserLogin() {
+    public UserLogin(Records records) {
+
+        UserLogin.records = records;
 
         userLogin = new JFrame("User Login");
         userLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -109,7 +114,7 @@ public class UserLogin {
                 loginThread.theThread.join();
                 if(loginThread.stopThread == false) {
                     JOptionPane.showMessageDialog(userLogin, "Invalid Username or Password");
-                    new UserLogin();
+                    new UserLogin(records);
                 }
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -121,6 +126,10 @@ public class UserLogin {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(UserLogin::new);
+        SwingUtilities.invokeLater(new Runnable() {
+                     @Override
+                        public void run() {
+                            new UserLogin(records);
+                    }});
     }
 }

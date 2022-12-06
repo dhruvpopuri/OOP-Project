@@ -18,9 +18,11 @@ public class HomeScreen {
 
 	public static List<String> categ =new ArrayList<String>();  
 	public static String[] array;
+    public static Records records;
 
 
-	public HomeScreen() {
+	public HomeScreen(Records records) {
+		HomeScreen.records = records;
 		JFrame frame = new JFrame("Home");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -28,7 +30,7 @@ public class HomeScreen {
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnNewButton = new JButton("Create New Card");
-		btnNewButton.addActionListener(e -> { new FlashCardBuilder();
+		btnNewButton.addActionListener(e -> { new FlashCardBuilder(records);
 			frame.setVisible(false);
 		});
 		btnNewButton.setBounds(106, 131, 164, 33);
@@ -42,7 +44,7 @@ public class HomeScreen {
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Create new Category");
-		btnNewButton_2.addActionListener(e -> { new CreateCategory();
+		btnNewButton_2.addActionListener(e -> { new CreateCategory(records);
 			frame.setVisible(false);
 		});
 		btnNewButton_2.setBounds(106, 304, 164, 33);
@@ -74,7 +76,11 @@ public class HomeScreen {
 		
 		getCategories();
 		getArray();
-		SwingUtilities.invokeLater(HomeScreen::new);
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			   public void run() {
+				   new HomeScreen(records);
+		   }});
 	}
 
 	public static void getCategories() {
