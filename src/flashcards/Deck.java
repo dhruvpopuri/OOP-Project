@@ -36,7 +36,6 @@ public class Deck implements java.io.Serializable {
             if(index != -1){
                 cards.remove(index);
             } else {
-                // Throw exception
                 System.out.println("Card does not exist");
             }
         } else {

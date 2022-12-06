@@ -156,7 +156,7 @@ public class FlashCardBuilder {
 					}
 				}
 				if(_index == -1) {
-					deck = new Deck(textField.getText(), null, records);
+					deck = new Deck(textField.getText(), records.getSessions().getCurrentLoggedInUser(), records);
 				} else deck = decks.get(_index);
 				
 				deck = new Deck(textField.getText(), records.getSessions().getCurrentLoggedInUser(), records);
