@@ -38,17 +38,23 @@ public class Revision {
 		frame.getContentPane().add(textArea);
 
 		HashMap<String, String> hs = records.getSessions().getCurrentLoggedInUser().attemptCard(card);
+		System.out.println("here first");
 		textArea.setText(hs.get("question"));
+		
+		textArea.setText("null");
+		System.out.println(hs.get("question"));
 
 
 		
-		try {
-			Thread.sleep(card.getCurrentTrainingInterval()*1000);
-			textArea.setText(hs.get("answer"));
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		// try {
+		// 	Thread.sleep(card.getCurrentTrainingInterval()*1000);
+		// 	System.out.println("here");
+		// 	textArea.setText("");
+		// 	textArea.setText(hs.get("correctAnswer"));
+		// } catch (InterruptedException e1) {
+		// 	// TODO Auto-generated catch block
+		// 	e1.printStackTrace();
+		// }
 		
 		JButton btnNewButton = new JButton("No");
 		btnNewButton.addActionListener(new ActionListener() {
