@@ -33,7 +33,7 @@ public class multipleChoice extends Card {
         HashMap<String, String> hs = new HashMap<String, String>();
         hs.put("question", this.question);
         hs.put("correctAnswer", this.correctAnswer);
-        
+
         int choice_index = 1;
         for(String choice: this.choices) {
             hs.put("Choice " + Integer.toString(choice_index), choice);

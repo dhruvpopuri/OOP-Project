@@ -5,7 +5,7 @@ import flashcards.cards.Card;
 
 public class Records implements java.io.Serializable {
     private ArrayList<Category> categories;
-    private ArrayList<Card> cards;
+    public ArrayList<Card> cards;
     private ArrayList<Deck> decks;
     private ArrayList<User> users;
 
@@ -32,7 +32,7 @@ public class Records implements java.io.Serializable {
         if(card.getCreator().equals(user)){
             int index = this.cards.indexOf(card);
             if(index != -1) {
-            cards.remove(index);
+                cards.remove(index);
             } // Else throw exception
 
             // Deleting the card from all the decks as well!
@@ -49,4 +49,11 @@ public class Records implements java.io.Serializable {
         this.decks.add(deck);
     }
 
+    public Category getCategory(int categoryId) {
+        Category _category = null;
+        for (Category category: categories) {
+            if(category.category_id == categoryId) _category = category;
+        }
+        return _category;
+    }
 }
