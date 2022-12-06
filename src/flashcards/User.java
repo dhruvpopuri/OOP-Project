@@ -72,11 +72,11 @@ public class User implements java.io.Serializable {
         return "Failure";
     }
 
-    public CardInterface nextCard(Date now, int categoryID) {
-    }
+    // public CardInterface nextCard(Date now, int categoryID) {
+    // }
 
-    public void startRevision() {
-    }
+    // public void startRevision() {
+    // }
 
     public HashMap<String, String> attemptCard(Card card) {
         // Updating number of cards the user sees per day!
