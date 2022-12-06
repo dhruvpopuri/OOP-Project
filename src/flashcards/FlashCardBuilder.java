@@ -7,6 +7,9 @@ import javax.swing.*;
 import flashcards.cards.Card;
 import flashcards.cards.CardType;
 import flashcards.cards.fillInTheBlank;
+import flashcards.cards.multipleChoice;
+import flashcards.cards.oneWord;
+import flashcards.cards.trueFalse;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -62,25 +65,28 @@ public class FlashCardBuilder {
 				// TODO Auto-generated method stub
 				Category category = new Category(selectedValue, null, records);
 				if(selectedValue == "Fill in the blanks"){
-					Card card = new Card(selectedValue, null, false, category, CardType.FILL_IN_THE_BLANKS, records);
+					Card card = new fillInTheBlank(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, question.getText(), answer.getText(), records);
 					deck.addCard(card);
 
 				}
 				else if(selectedValue == "Multiple choice"){
-					Card card = new Card(selectedValue, null, false, category, CardType.MULTIPLE_CHOICE, records);
+					Card card = new multipleChoice(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, question.getText(), answer.getText(), records);
 					deck.addCard(card);
 
 				}
 				else if(selectedValue == "One Word"){
-					Card card = new Card(selectedValue, null, false, category, CardType.ONE_WORD, records);
+					Card card = new oneWord(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, question.getText(), answer.getText(), records);
 					deck.addCard(card);
 
 				}
 				else if(selectedValue == "True/False"){
-					Card card = new Card(selectedValue, null, false, category, CardType.TRUE_FALSE, records);
+					Card card = new trueFalse(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, question.getText(), answer.getText(), records);
 					deck.addCard(card);
 
 				}
+				question.setText("");
+				answer.setText("");
+				question.requestFocus();
 				
 			}
 		});
@@ -141,8 +147,17 @@ public class FlashCardBuilder {
 		JButton btnCreate = new JButton("Create");
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				deck = new Deck(textField.getText(), null, records);
+				ArrayList<Deck> decks = records.decks;
+				String deckName = textField.getText();
+				int _index = -1;
+				for (int index = 0; index < decks.size(); index++) {
+					if(decks.get(index).getName().equals(deckName)) {
+						_index = index;
+					}
+				}
+				if(_index == -1) {
+					deck = new Deck(textField.getText(), null, records);
+				} else deck = decks.get(_index);
 			}
 		});
 		btnCreate.setBounds(283, 336, 91, 21);
@@ -158,7 +173,6 @@ public class FlashCardBuilder {
 				new FlashCardBuilder(records);
 			}
 		});
-		
 		
 	}
 }

@@ -11,7 +11,7 @@ public class fillInTheBlank extends Card {
     private String question;
     private String correctAnswer;
 
-    fillInTheBlank(String name, User createdByUser, boolean isPublic, Category category, String question, String correctAnswer, Records records){
+    public fillInTheBlank(String name, User createdByUser, boolean isPublic, Category category, String question, String correctAnswer, Records records){
         super(name, createdByUser, isPublic, category, CardType.FILL_IN_THE_BLANKS, records);
         this.question = question;
         this.correctAnswer = correctAnswer;
