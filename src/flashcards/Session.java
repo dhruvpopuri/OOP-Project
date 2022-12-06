@@ -1,6 +1,6 @@
 package flashcards;
 
-public class Session {
+public class Session implements java.io.Serializable {
     private User currentLoggedInUser;
 
     public Session(User user) {

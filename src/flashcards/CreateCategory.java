@@ -52,7 +52,8 @@ public class CreateCategory {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					String category = textField.getText();
-					addCategory(category);
+					Category cat = new Category(category, records.getSessions().getCurrentLoggedInUser(), records);
+					// addCategory(cat);
 					frame.setVisible(false);
 					new HomeScreen(records);
 				} catch (Exception e2) {
@@ -78,15 +79,8 @@ public class CreateCategory {
 		});
 	}
 
-	public void addCategory(String category) {
-        File file = new File("src/flashcards/categories.txt");
-        try {
-            PrintWriter pw = new PrintWriter(new FileWriter(file, true));
-            pw.append(category).append('\n');
-            pw.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+	public void addCategory(Category category) {
+        records.addCategory(category);
     }
 
 }

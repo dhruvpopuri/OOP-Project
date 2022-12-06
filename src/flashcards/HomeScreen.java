@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.io.*;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -37,7 +37,7 @@ public class HomeScreen {
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Start Revision");
-		btnNewButton_1.addActionListener(e -> { new Revision();
+		btnNewButton_1.addActionListener(e -> { new SelectDeck();
 			frame.setVisible(false);
 		});
 		btnNewButton_1.setBounds(106, 217, 164, 33);
@@ -57,13 +57,25 @@ public class HomeScreen {
 		
 		// String test[]={"India","Aus","U.S.A","England","Newzealand"};   
 		
-  
+		getArray();
 		JComboBox comboBox = new JComboBox(array);
 		comboBox.setBounds(106, 20, 164, 33);
 		frame.getContentPane().add(comboBox);
 		
 		JButton btnNewButton_1_1 = new JButton("Log out");
 		btnNewButton_1_1.addActionListener(e -> { frame.setVisible(false);
+			try {
+				FileOutputStream fileOut =
+						new FileOutputStream("records.ser");
+				ObjectOutputStream out = new ObjectOutputStream(fileOut);
+				out.writeObject(records);
+				out.close();
+				fileOut.close();
+				System.out.printf("Serialized data is saved in records.ser");
+			} catch (IOException i) {
+				i.printStackTrace();
+			}
+			records.setSession(null);
 			new StartScreen();
 		});
 		btnNewButton_1_1.setBounds(106, 387, 164, 33);
@@ -83,21 +95,26 @@ public class HomeScreen {
 		   }});
 	}
 
-	public static void getCategories() {
-        File file = new File("src/flashcards/categories.txt");
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String line;
-            while ((line = br.readLine()) != null) {
-				categ.add(line);
-            }
-            br.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+	public static ArrayList<Category> getCategories() {
+        // File file = new File("src/flashcards/categories.txt");
+        // try {
+        //     BufferedReader br = new BufferedReader(new FileReader(file));
+        //     String line;
+        //     while ((line = br.readLine()) != null) {
+		// 		categ.add(line);
+        //     }
+        //     br.close();
+        // } catch (IOException e) {
+        //     System.out.println(e.getMessage());
+        // }
+		return records.getCategories();
     }
 
 	public static void getArray(){
-		array = categ.toArray(new String[categ.size()]);   
+		array = new String[getCategories().size()];
+		int i = 0;
+		for(Category cat: getCategories()) {
+			array[i++] = cat.getCategoryName();
+		}
 	}
 }

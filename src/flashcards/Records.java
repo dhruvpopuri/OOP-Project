@@ -1,19 +1,29 @@
 package flashcards;
 
 import java.util.ArrayList;
+import java.util.concurrent.Flow.Subscriber;
+
 import flashcards.cards.Card;
+
+import java.io.FileOutputStream;
+import java.io.*;
 
 public class Records implements java.io.Serializable {
     private ArrayList<Category> categories;
     public ArrayList<Card> cards;
     private ArrayList<Deck> decks;
     private ArrayList<User> users;
+    private Session activeSession;
 
     Records() {
         categories = new ArrayList<Category>();
         cards = new ArrayList<Card>();
         decks = new ArrayList<Deck>();
         users = new ArrayList<User>();
+    }
+
+    public ArrayList<User> getUsers() {
+        return this.users;
     }
 
     public void addCategory(Category category) {
@@ -25,7 +35,33 @@ public class Records implements java.io.Serializable {
     }
 
     public void addUser(User user) {
+        System.out.println("Adding user");
         this.users.add(user);
+        for(User u: this.users) {
+            System.out.println(u.getUsername());
+        }
+    }
+
+    // public static void saveToDB(Records records) {
+    //     try {
+	// 		FileOutputStream fileOut =
+	// 				new FileOutputStream("records.ser");
+	// 		ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	// 		out.writeObject(records);
+	// 		out.close();
+	// 		fileOut.close();
+	// 		System.out.printf("Serialized data is saved in records.ser");
+	// 	} catch (IOException i) {
+	// 		i.printStackTrace();
+	// 	}
+    // }
+
+    public Session getSessions() {
+        return this.activeSession;
+    }
+
+    public void setSession(Session session) {
+        this.activeSession = session;
     }
 
     public void deleteCard(Card card, User user) throws InvalidUserException {
@@ -55,5 +91,9 @@ public class Records implements java.io.Serializable {
             if(category.category_id == categoryId) _category = category;
         }
         return _category;
+    }
+
+    public ArrayList<Category> getCategories() {
+        return this.categories;
     }
 }

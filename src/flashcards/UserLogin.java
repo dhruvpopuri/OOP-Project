@@ -15,7 +15,8 @@ class LoginThread implements Runnable {
     
     public static Records records;
 
-    LoginThread(String username, String password) {
+    LoginThread(String username, String password, Records myRecords) {
+        records = myRecords;
         this.username = username;
         this.password = password;
     }
@@ -35,39 +36,45 @@ class LoginThread implements Runnable {
     public void run() {
         while (!stopThread) {
             try {
-                boolean userExists = doesUserExist(username, password);
-                if (!userExists) {
-                    // Display Incorrect Credentials
-                    theThread.stop();
-                } else {
-                    new HomeScreen(records);
-                    setStopThread(true);
-                }
+                User user = getUser(username, password);
+                new HomeScreen(records);
+                setStopThread(true);
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println(e.getMessage() + "Error here");
+                theThread.stop();
             }
         }
     }
 
-    public boolean doesUserExist(String username, String password) {
-        System.out.println(username + " " + password);
-        File file = new File("src/flashcards/users.txt");
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] strings = line.split(".");
-                if (strings[0].equals(username) && strings[1].equals(password)) {
-                    br.close();
-                    return true;
-                }
+    public User getUser(String username, String password) throws InvalidUserException {
+        // System.out.println(username + " " + password);
+        // File file = new File("src/flashcards/users.txt");
+        // try {
+        //     BufferedReader br = new BufferedReader(new FileReader(file));
+        //     String line;
+        //     while ((line = br.readLine()) != null) {
+        //         String[] strings = line.split(".");
+        //         if (strings[0].equals(username) && strings[1].equals(password)) {
+        //             br.close();
+        //             return true;
+        //         }
+        //     }
+        //     br.close();
+        //     return false;
+        // } catch (IOException e) {
+        //     System.out.println(e.getMessage());
+        // }
+        // return false;
+        for(User user: records.getUsers()) {
+            System.out.println(user.getUsername() + username + user.getPassword() + password);
+            if(user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                Session session = new Session(user);
+                records.setSession(session);
+                return user;
             }
-            br.close();
-            return false;
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         }
-        return false;
+
+        throw new InvalidUserException("User does not exist");
     }
 }
 
@@ -108,7 +115,7 @@ public class UserLogin {
         btnNewButton.addActionListener(actionEvent -> {
             String username = textField.getText();
             String password = String.valueOf(passwordField.getPassword());
-            LoginThread loginThread = new LoginThread(username, password);
+            LoginThread loginThread = new LoginThread(username, password, records);
             loginThread.start();
             try {
                 loginThread.theThread.join();

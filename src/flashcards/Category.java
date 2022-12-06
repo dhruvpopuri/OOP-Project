@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import flashcards.cards.Card;
 
-public class Category implements java.io.Serializable{
+public class Category implements java.io.Serializable {
     public int category_id;
     private String name;
     private ArrayList<Card> publicCards;
@@ -46,5 +46,9 @@ public class Category implements java.io.Serializable{
 
     public void deleteCard(Card card) {
         // To delete from the records -> cards and records -> decks
+    }
+
+    public String getCategoryName() {
+        return this.name;
     }
 }

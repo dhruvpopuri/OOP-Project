@@ -56,10 +56,13 @@ public class UserSignUp {
                 String username = textField.getText();
                 String email = textField_1.getText();
                 String password = String.valueOf(textField_2.getPassword());
-                addUser(username, password, email);
+                User user = addUser(username, password, email);
+                Session session = new Session(user);
+                records.setSession(session);
+                System.out.println("User added successfully, new homescreen");
                 new HomeScreen(records);
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println(e);
             }
         });
         btnNewButton.setBounds(139, 362, 85, 21);
@@ -67,15 +70,17 @@ public class UserSignUp {
         userSignup.setVisible(true);
     }
 
-    public void addUser(String username, String password, String email) {
-        File file = new File("src/flashcards/users.txt");
-        try {
-            PrintWriter pw = new PrintWriter(new FileWriter(file, true));
-            pw.append(username).append(".").append(password).append(".").append(email).append('\n');
-            pw.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public User addUser(String username, String password, String email) {
+        // File file = new File("src/flashcards/users.txt");
+        // try {
+        //     PrintWriter pw = new PrintWriter(new FileWriter(file, true));
+        //     pw.append(username).append(".").append(password).append(".").append(email).append('\n');
+        //     pw.close();
+        // } catch (IOException e) {
+        //     throw new RuntimeException(e);
+        // }
+        User user = new User(email, password, username, records);
+        return user;
     }
 
     public static void main(String[] args) {

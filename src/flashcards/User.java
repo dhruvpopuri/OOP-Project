@@ -4,8 +4,10 @@ import java.util.*;
 import java.time.LocalDate;
 
 import flashcards.cards.Card;
+import flashcards.cards.CardType;
 
 public class User implements java.io.Serializable {
+    private String username;
     private String email;
     private String password;
     private ArrayList<Card> cardsOwnedByUser; //Array of IDs of the cards
@@ -14,16 +16,23 @@ public class User implements java.io.Serializable {
     private HashMap<String, Integer> numCardsSeenPerDay;
     private ArrayList<Deck> decks;
     StartScreen startScreen = new StartScreen();
-    Records records = startScreen.records;
+    Records records;
+
+    static int nextId = 1;
 
 
-    public User(String email, String password, int id, Records records) {
+    public User(String email, String password, String username, Records records) {
+        this.username = username;
         this.email = email;
         this.password = password;
-        this.id = id;
+        this.id = nextId;
+        this.records = records;
+        nextId++;
         cardsOwnedByUser = new ArrayList<>();
         cardsPerDay = new HashMap<>();
         records.addUser(this);
+
+        // Records.saveToDB(records);
     }
 
     public void createCategory(String categoryName) {
@@ -31,10 +40,11 @@ public class User implements java.io.Serializable {
         records.addCategory(category);
     }
 
-    public void createCard(String cardName, int cardType, int categoryId) {
-        Card card = new Card(cardName, this, false, records.getCategory(categoryId), records);
-        cardsOwnedByUser.add(card);
-        records.addCard(card);
+    public void createCard(String cardName, CardType cardType, int categoryId) {
+        // Card card = new Card(cardName, this, false, records.getCategory(categoryId), records); 
+        // cardsOwnedByUser.add(card);
+        // records.addCard(card);
+        // TO DO: Use switch case to call the right constructor depending upon the cardType
     }
 
     public ArrayList<Card> getCardsOwned() {
@@ -103,4 +113,13 @@ public class User implements java.io.Serializable {
     public ArrayList<Deck> getUserDecks() {
         return this.decks;
     }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public String getPassword(){
+        return this.password;
+    }
+    
 }
