@@ -10,6 +10,7 @@ public class StartScreen {
 	public static Records records;
 
 	public StartScreen() {
+
 		JFrame signIn = new JFrame("Flash Card");
 		signIn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		signIn.setSize(400, 500);
