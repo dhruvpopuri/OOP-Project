@@ -69,25 +69,29 @@ public class FlashCardBuilder {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Category category = new Category(selectedValue, records.getSessions().getCurrentLoggedInUser(), records);
-				if(selectedValue.equals(new String("Fill in the blanks"))){
-					Card card = new fillInTheBlank("flashcard", records.getSessions().getCurrentLoggedInUser(), false, category, qlabel.getText(), alabel.getText(), records);
+				Category category = new Category(selectedValue, null, records);
+				if(selectedValue == "Fill in the blanks"){
+					Card card = new fillInTheBlank(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, question.getText(), answer.getText(), records);
 					deck.addCard(card);
 
 				}
-				else if(selectedValue.equals(new String("Multiple choice"))){
-					Card card = new multipleChoice("flashcard", records.getSessions().getCurrentLoggedInUser(), false, category, qlabel.getText(), alabel.getText(), records);
+				else if(selectedValue == "Multiple choice"){
+					Card card = new multipleChoice(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, question.getText(), answer.getText(), records);
 					deck.addCard(card);
 
 				}
-				else if(selectedValue.equals(new String("One Word"))){
-					Card card = new oneWord("flashcard", records.getSessions().getCurrentLoggedInUser(), false, category, qlabel.getText(), alabel.getText(), records);
+				else if(selectedValue == "One Word"){
+					Card card = new oneWord(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, question.getText(), answer.getText(), records);
+					deck.addCard(card);
 
 				}
-				else if(selectedValue.equals(new String("True/False"))){
-					Card card = new trueFalse("flashcard", records.getSessions().getCurrentLoggedInUser(), false, category, qlabel.getText(), Boolean.parseBoolean(alabel.getText()), records);
+				else if(selectedValue == "True/False"){
+					Card card = new trueFalse(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, question.getText(), answer.getText(), records);
 					deck.addCard(card);
 				}
+				question.setText("");
+				answer.setText("");
+				question.requestFocus();
 				
 			}
 		});
@@ -143,6 +147,17 @@ public class FlashCardBuilder {
 		JButton btnCreate = new JButton("Create");
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ArrayList<Deck> decks = records.decks;
+				String deckName = textField.getText();
+				int _index = -1;
+				for (int index = 0; index < decks.size(); index++) {
+					if(decks.get(index).getName().equals(deckName)) {
+						_index = index;
+					}
+				}
+				if(_index == -1) {
+					deck = new Deck(textField.getText(), null, records);
+				} else deck = decks.get(_index);
 				
 				deck = new Deck(textField.getText(), records.getSessions().getCurrentLoggedInUser(), records);
 				System.out.println("created new deck");
@@ -161,7 +176,6 @@ public class FlashCardBuilder {
 				new FlashCardBuilder(records);
 			}
 		});
-		
 		
 	}
 }

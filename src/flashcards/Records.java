@@ -11,7 +11,7 @@ import java.io.*;
 public class Records implements java.io.Serializable {
     private ArrayList<Category> categories;
     public ArrayList<Card> cards;
-    private ArrayList<Deck> decks;
+    public ArrayList<Deck> decks;
     private ArrayList<User> users;
     private Session activeSession;
 
