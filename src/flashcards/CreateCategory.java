@@ -53,7 +53,6 @@ public class CreateCategory {
 				try {
 					String category = textField.getText();
 					Category cat = new Category(category, records.getSessions().getCurrentLoggedInUser(), records);
-					// addCategory(cat);
 					frame.setVisible(false);
 					new HomeScreen(records);
 				} catch (Exception e2) {

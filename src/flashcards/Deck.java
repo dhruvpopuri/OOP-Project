@@ -43,4 +43,9 @@ public class Deck implements java.io.Serializable {
             throw new InvalidUserException("Only the creator of the card or the owner of the deck can delete it");
         }
     }
+
+    public Card getNextCard(Card c) {
+        int index = this.cards.indexOf(c)+1;
+        return this.cards.get(index);
+    }
 }
