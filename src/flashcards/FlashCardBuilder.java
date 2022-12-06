@@ -56,8 +56,14 @@ public class FlashCardBuilder {
 		scrollpane_question.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 		scrollpane_question.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+		JLabel qlabel = new JLabel("Question");
+		qlabel.setBounds(153, 10, 91, 13);
+		JLabel alabel = new JLabel("Answer");
+		alabel.setBounds(153, 190, 80, 13);
+		mainPanel.setLayout(null);
 		
-		JButton nextButton = new JButton("Next Card");
+		JButton nextButton = new JButton("Save Card");
 		nextButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -82,7 +88,6 @@ public class FlashCardBuilder {
 				else if(selectedValue == "True/False"){
 					Card card = new trueFalse(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, question.getText(), answer.getText(), records);
 					deck.addCard(card);
-
 				}
 				question.setText("");
 				answer.setText("");
@@ -105,11 +110,6 @@ public class FlashCardBuilder {
 		
 		cardList = new ArrayList<Card>();
 		
-		JLabel qlabel = new JLabel("Question");
-		qlabel.setBounds(153, 10, 91, 13);
-		JLabel alabel = new JLabel("Answer");
-		alabel.setBounds(153, 190, 80, 13);
-		mainPanel.setLayout(null);
 		
 		
 		mainPanel.add(qlabel);
@@ -158,6 +158,9 @@ public class FlashCardBuilder {
 				if(_index == -1) {
 					deck = new Deck(textField.getText(), null, records);
 				} else deck = decks.get(_index);
+				
+				deck = new Deck(textField.getText(), records.getSessions().getCurrentLoggedInUser(), records);
+				System.out.println("created new deck");
 			}
 		});
 		btnCreate.setBounds(283, 336, 91, 21);

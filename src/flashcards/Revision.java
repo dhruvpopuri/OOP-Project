@@ -3,17 +3,26 @@ package flashcards;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
+
+import flashcards.cards.Card;
+
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.awt.event.ActionEvent;
 
 public class Revision {
+
+	public static Records records;
+	public static Card card;
 	
 	/**
 	 * @wbp.parser.entryPoint
 	 */
-	public Revision() {
+	public Revision(Card card, Records records) {
+		Revision.records = records;
+		Revision.card = card;
 		JFrame frame = new JFrame("Revision");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -23,6 +32,9 @@ public class Revision {
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(50, 66, 274, 142);
 		frame.getContentPane().add(textArea);
+
+		HashMap<String, String> hs = records.getSessions().getCurrentLoggedInUser().attemptCard(card);
+		textArea.setText(hs.get("question"));
 		
 		JButton btnNewButton = new JButton("No");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -57,7 +69,12 @@ public class Revision {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		SwingUtilities.invokeLater(Revision::new);
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				new Revision(card, records);
+			}
+		});
 
 	}
 }

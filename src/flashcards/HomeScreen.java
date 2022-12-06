@@ -37,7 +37,7 @@ public class HomeScreen {
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Start Revision");
-		btnNewButton_1.addActionListener(e -> { new SelectDeck();
+		btnNewButton_1.addActionListener(e -> { new SelectDeck(records);
 			frame.setVisible(false);
 		});
 		btnNewButton_1.setBounds(106, 217, 164, 33);

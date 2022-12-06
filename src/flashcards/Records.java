@@ -83,6 +83,7 @@ public class Records implements java.io.Serializable {
     }
     public void addDeck(Deck deck) {
         this.decks.add(deck);
+        System.out.println(deck);
     }
 
     public Category getCategory(int categoryId) {

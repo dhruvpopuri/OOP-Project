@@ -15,6 +15,7 @@ public class Deck implements java.io.Serializable {
         this.cards = new ArrayList<Card>();
         this.owner = user;
         records.addDeck(this);
+        user.addDeck(this);
     }
 
     public String getName() {
