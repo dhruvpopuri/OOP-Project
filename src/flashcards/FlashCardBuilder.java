@@ -70,22 +70,22 @@ public class FlashCardBuilder {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Category category = new Category(selectedValue, null, records);
-				if(selectedValue == "Fill in the blanks"){
+				if(selectedValue.equals("Fill in the blanks")){
 					Card card = new fillInTheBlank(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, question.getText(), answer.getText(), records);
 					deck.addCard(card);
 
 				}
-				else if(selectedValue == "Multiple choice"){
+				else if(selectedValue.equals("Multiple choice")){
 					Card card = new multipleChoice(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, question.getText(), answer.getText(), records);
 					deck.addCard(card);
 
 				}
-				else if(selectedValue == "One Word"){
+				else if(selectedValue.equals("One Word")){
 					Card card = new oneWord(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, question.getText(), answer.getText(), records);
 					deck.addCard(card);
 
 				}
-				else if(selectedValue == "True/False"){
+				else if(selectedValue.equals("True/False")){
 					Card card = new trueFalse(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, question.getText(), answer.getText(), records);
 					deck.addCard(card);
 				}
@@ -118,9 +118,9 @@ public class FlashCardBuilder {
 		mainPanel.add(scrollpane);
 		mainPanel.add(nextButton);
 		mainPanel.add(homeButton);
-		nextButton.addActionListener(new NextCardListener(cardList, question, answer));
-		homeButton.addActionListener(e -> {frame.setVisible(false);
-		new HomeScreen(records);});
+		// nextButton.addActionListener(new NextCardListener(cardList, question, answer));
+		// homeButton.addActionListener(e -> {frame.setVisible(false);
+		// new HomeScreen(records);});
 		
 		
 		frame.getContentPane().add(BorderLayout.CENTER, mainPanel);

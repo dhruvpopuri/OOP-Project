@@ -33,29 +33,12 @@ public class Revision {
 		frame.setSize(400, 500);
 		frame.getContentPane().setLayout(null);
 		
+		frame.setVisible(true);
+		
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(50, 66, 274, 142);
 		frame.getContentPane().add(textArea);
 
-		HashMap<String, String> hs = records.getSessions().getCurrentLoggedInUser().attemptCard(card);
-		System.out.println("here first");
-		textArea.setText(hs.get("question"));
-		
-		textArea.setText("null");
-		System.out.println(hs.get("question"));
-
-
-		
-		// try {
-		// 	Thread.sleep(card.getCurrentTrainingInterval()*1000);
-		// 	System.out.println("here");
-		// 	textArea.setText("");
-		// 	textArea.setText(hs.get("correctAnswer"));
-		// } catch (InterruptedException e1) {
-		// 	// TODO Auto-generated catch block
-		// 	e1.printStackTrace();
-		// }
-		
 		JButton btnNewButton = new JButton("No");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -93,7 +76,24 @@ public class Revision {
 		});
 		btnNewButton_1.setBounds(146, 328, 85, 21);
 		frame.getContentPane().add(btnNewButton_1);
-		frame.setVisible(true);
+
+		HashMap<String, String> hs = records.getSessions().getCurrentLoggedInUser().attemptCard(card);
+		System.out.println("here first");
+		textArea.setText(hs.get("question"));
+		System.out.println(hs.get("question"));
+
+		Timer timer = new Timer();
+        TimerTask task = new Helper(card, records, textArea);
+         
+        timer.schedule(task, card.getCurrentTrainingInterval()*1000);
+
+		// int delay = card.getCurrentTrainingInterval()*1000; // number of milliseconds to sleep
+
+		// long start = System.currentTimeMillis();
+		// while(start >= System.currentTimeMillis() - delay);
+		 // do nothing
+		 
+		
 		
 	}
 
@@ -107,4 +107,22 @@ public class Revision {
 		});
 
 	}
+
+}
+
+class Helper extends TimerTask
+{
+	Card card;
+	Records records;
+	JTextArea textArea;
+	Helper(Card card, Records records, JTextArea textArea){
+		this.card = card;
+		this.records = records;
+		this.textArea = textArea;
+	}
+    public void run()
+    {
+		HashMap<String, String> hs = records.getSessions().getCurrentLoggedInUser().attemptCard(card);
+        textArea.setText(hs.get("correctAnswer"));
+    }
 }
