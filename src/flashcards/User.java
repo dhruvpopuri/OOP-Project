@@ -40,11 +40,9 @@ public class User implements java.io.Serializable {
         records.addCategory(category);
     }
 
-    public void createCard(String cardName, CardType cardType, int categoryId) {
-        // Card card = new Card(cardName, this, false, records.getCategory(categoryId), records); 
-        // cardsOwnedByUser.add(card);
-        // records.addCard(card);
-        // TO DO: Use switch case to call the right constructor depending upon the cardType
+    public void createCard(String cardName, int cardType, int categoryId) {
+        Card card = new Card(cardName, this, false, records.getCategory(categoryId), null, records);
+        cardsOwnedByUser.add(card);
     }
 
     public ArrayList<Card> getCardsOwned() {
