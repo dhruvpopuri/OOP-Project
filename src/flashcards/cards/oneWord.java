@@ -12,7 +12,7 @@ public class oneWord extends Card {
     private String correctAnswer;
 
     oneWord(String name, User createdByUser, boolean isPublic, Category category, String question, String correctAnswer, Records records){
-        super(name, createdByUser, isPublic, category, records);
+        super(name, createdByUser, isPublic, category, CardType.ONE_WORD, records);
         this.question = question;
         this.correctAnswer = correctAnswer;
     }

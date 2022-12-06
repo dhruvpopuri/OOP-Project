@@ -18,7 +18,7 @@ public class Card implements CardInterface, java.io.Serializable {
     private CardType cardType;
     private static int nextId = 1;
 
-    public Card(String name, User createdByUser, boolean isPublic, Category category, Records records) {
+    public Card(String name, User createdByUser, boolean isPublic, Category category, CardType cardType, Records records) {
         this.card_id = nextId;
         nextId++;
         this.name = name;
@@ -26,6 +26,7 @@ public class Card implements CardInterface, java.io.Serializable {
         this.isPublic = isPublic;
         this.category = category;
         this.currentTrainingInterval = 5; // Set by default to five seconds
+        this.cardType = cardType;
 
         records.addCard(this); // Adding to records
     }
@@ -35,6 +36,10 @@ public class Card implements CardInterface, java.io.Serializable {
         this.currentTrainingInterval = currentTrainingInterval;
 
         return this;
+    }
+
+    public void setCardType(CardType cardType) {
+        this.cardType = cardType;
     }
 
     // public Card getData() {

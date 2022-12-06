@@ -12,7 +12,7 @@ public class trueFalse extends Card {
     private boolean correctAnswer;
 
     trueFalse(String name, User createdByUser, boolean isPublic, Category category, String question, boolean correctAnswer, Records records) {
-        super(name, createdByUser, isPublic, category, records);
+        super(name, createdByUser, isPublic, category, CardType.TRUE_FALSE, records);
         this.question = question;
         this.correctAnswer = correctAnswer;
     }
