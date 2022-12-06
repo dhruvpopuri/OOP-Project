@@ -14,11 +14,11 @@ public class Card implements CardInterface, java.io.Serializable {
     private User createdByUser;
     private boolean isPublic;
     private int currentTrainingInterval;
-    private Category category;
+    public Category category;
     private CardType cardType;
     private static int nextId = 1;
 
-    Card(String name, User createdByUser, boolean isPublic, Category category, Records records) {
+    public Card(String name, User createdByUser, boolean isPublic, Category category, Records records) {
         this.card_id = nextId;
         nextId++;
         this.name = name;
@@ -59,6 +59,11 @@ public class Card implements CardInterface, java.io.Serializable {
         return this.currentTrainingInterval;
     }
 
+    @Override
+    public int getCard_id() {
+        return this.card_id;
+    }
+
     public void setCurrentTrainingInterval(int interval){
         this.currentTrainingInterval = interval;
     }
@@ -77,10 +82,6 @@ public class Card implements CardInterface, java.io.Serializable {
         return hs;
     }
 
-    public int getCardID() {
-        return this.card_id;
-    }
-
     public void updateLearningInterval(boolean currentAttemptSuccess) {
         if(currentAttemptSuccess) {
             // Will keep reducing till the minimum interval which is 2
@@ -88,7 +89,7 @@ public class Card implements CardInterface, java.io.Serializable {
                 currentTrainingInterval = currentTrainingInterval - 1;
             }
         } else {
-            // Will keep increasing till the maximum interval which is 7 
+            // Will keep increasing till the maximum interval which is 7
             if(currentTrainingInterval<7){
                 currentTrainingInterval = currentTrainingInterval + 1;
             }
