@@ -18,7 +18,7 @@ public class Card implements CardInterface, java.io.Serializable {
     private CardType cardType;
     private static int nextId = 1;
 
-    Card(String name, User createdByUser, boolean isPublic, Category category, Records records) {
+    public Card(String name, User createdByUser, boolean isPublic, Category category, Records records) {
         this.card_id = nextId;
         nextId++;
         this.name = name;
