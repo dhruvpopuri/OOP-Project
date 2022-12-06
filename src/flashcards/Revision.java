@@ -10,19 +10,23 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.awt.event.ActionEvent;
 
 public class Revision {
 
 	public static Records records;
 	public static Card card;
+	public static Deck deck;
 	
 	/**
 	 * @wbp.parser.entryPoint
 	 */
-	public Revision(Card card, Records records) {
+	public Revision(Card card, Records records, Deck deck) {
 		Revision.records = records;
 		Revision.card = card;
+		Revision.deck = deck;
 		JFrame frame = new JFrame("Revision");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -35,10 +39,24 @@ public class Revision {
 
 		HashMap<String, String> hs = records.getSessions().getCurrentLoggedInUser().attemptCard(card);
 		textArea.setText(hs.get("question"));
+
+
+		
+		try {
+			Thread.sleep(card.getCurrentTrainingInterval()*1000);
+			textArea.setText(hs.get("answer"));
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		JButton btnNewButton = new JButton("No");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				card.updateLearningInterval(false);
+				Card nextCard = deck.getNextCard(card);
+				frame.setVisible(false);
+				new Revision(nextCard, records, deck);
 			}
 		});
 		btnNewButton.setBounds(211, 251, 85, 21);
@@ -47,6 +65,10 @@ public class Revision {
 		JButton btnNextCard = new JButton("Yes");
 		btnNextCard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				card.updateLearningInterval(true);
+				Card nextCard = deck.getNextCard(card);
+				frame.setVisible(false);
+				new Revision(nextCard, records, deck);
 			}
 		});
 		btnNextCard.setBounds(81, 251, 85, 21);
@@ -59,6 +81,8 @@ public class Revision {
 		JButton btnNewButton_1 = new JButton("Home");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				new HomeScreen(records);
 			}
 		});
 		btnNewButton_1.setBounds(146, 328, 85, 21);
@@ -72,7 +96,7 @@ public class Revision {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				new Revision(card, records);
+				new Revision(card, records, deck);
 			}
 		});
 

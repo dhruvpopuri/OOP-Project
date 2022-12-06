@@ -59,10 +59,8 @@ public class SelectDeck {
 					return;
 				}
 				frame.setVisible(false);
-				for(Card card: myDeck.getCards()) {
-					new Revision(card, records);
-					frame.setVisible(true);
-				}
+				Card card = myDeck.getCards().get(0);
+				new Revision(card, records, myDeck);
 			}
 		});
 		btnStart.setBounds(204, 275, 85, 21);

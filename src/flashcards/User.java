@@ -125,5 +125,6 @@ public class User implements java.io.Serializable {
     public String getPassword(){
         return this.password;
     }
+
     
 }
