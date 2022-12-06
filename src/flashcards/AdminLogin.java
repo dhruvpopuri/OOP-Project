@@ -11,8 +11,10 @@ public class AdminLogin {
 
 	private final JTextField textField;
 	private final JPasswordField passwordField;
+    public static Records records;
 	
-	public AdminLogin() {
+	public AdminLogin(Records records) {
+		AdminLogin.records = records;
 		JFrame frame = new JFrame("Admin Login");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -41,7 +43,7 @@ public class AdminLogin {
 			try {
 				String username = textField.getText();
 				String password = String.valueOf(passwordField.getPassword());
-				if (username.equals("admin") && password.equals("5678")) new HomeScreen();
+				if (username.equals("admin") && password.equals("5678")) new HomeScreen(records);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -53,6 +55,11 @@ public class AdminLogin {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		SwingUtilities.invokeLater(AdminLogin::new);
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				new AdminLogin(records);
+			}
+		});
 	}
 }

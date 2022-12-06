@@ -17,7 +17,11 @@ public class CreateCategory {
 	/**
 	 * @wbp.parser.entryPoint
 	 */
-	public CreateCategory() {
+
+	
+    public static Records records;
+	public CreateCategory(Records records) {
+		CreateCategory.records = records;
 		JFrame frame = new JFrame("Create Category");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -37,7 +41,7 @@ public class CreateCategory {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				new HomeScreen();
+				new HomeScreen(records);
 			}
 		});
 		btnNewButton.setBounds(59, 280, 85, 21);
@@ -50,7 +54,7 @@ public class CreateCategory {
 					String category = textField.getText();
 					addCategory(category);
 					frame.setVisible(false);
-					new HomeScreen();
+					new HomeScreen(records);
 				} catch (Exception e2) {
 					System.out.println(e2.getMessage());
 				}
@@ -66,7 +70,12 @@ public class CreateCategory {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		SwingUtilities.invokeLater(CreateCategory::new);
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				new CreateCategory(records);
+			}
+		});
 	}
 
 	public void addCategory(String category) {

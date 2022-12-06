@@ -5,6 +5,10 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import flashcards.cards.Card;
+import flashcards.cards.fillInTheBlank;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 public class FlashCardBuilder {
@@ -13,9 +17,12 @@ public class FlashCardBuilder {
 	private final JTextArea answer;
 	private final ArrayList<Card> cardList;
 	private final JFrame frame;
+	String selectedValue;
+    public static Records records;
 	
 	
-	public FlashCardBuilder(){
+	public FlashCardBuilder(Records records){
+		FlashCardBuilder.records = records;
 		frame = new JFrame("Flash Card");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -45,9 +52,29 @@ public class FlashCardBuilder {
 		scrollpane_question.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		JButton nextButton = new JButton("Next Card");
-		nextButton.setBounds(102, 410, 77, 21);
+		nextButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Category category = new Category(selectedValue, null, records);
+				Card card = new Card(selectedValue, null, false, category, records);
+				if(selectedValue == "Fill in the blanks"){
+				}
+				
+			}
+		});
+		nextButton.setBounds(61, 410, 118, 21);
 		JButton homeButton = new JButton("Home");
-		homeButton.setBounds(204, 410, 59, 21);
+		homeButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		homeButton.setBounds(204, 410, 110, 21);
 		
 		cardList = new ArrayList<Card>();
 		
@@ -66,7 +93,7 @@ public class FlashCardBuilder {
 		mainPanel.add(homeButton);
 		nextButton.addActionListener(new NextCardListener(cardList, question, answer));
 		homeButton.addActionListener(e -> {frame.setVisible(false);
-		new HomeScreen();});
+		new HomeScreen(records);});
 		
 		JMenuBar menuBar = new JMenuBar();
 		JMenu cardMenu = new JMenu("Cards");
@@ -80,15 +107,14 @@ public class FlashCardBuilder {
 		menuBar.add(cardMenu);
 		frame.setJMenuBar(menuBar);
 		
-		newMenuItem.addActionListener(new NewMenuItemListener());
-		saveMenuItem.addActionListener(new SaveMenuItemListener());
-		
 		
 		frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
 		
-		JComboBox comboBox = new JComboBox();
+		String []choice = {"Fill in the blanks","Multiple choice", "One Word", "True/False" };
+		JComboBox comboBox = new JComboBox(choice);
 		comboBox.setBounds(102, 379, 161, 21);
 		mainPanel.add(comboBox);
+		selectedValue = comboBox.getSelectedItem().toString();
 		
 		JLabel lblNewLabel = new JLabel("Card Type");
 		lblNewLabel.setBounds(21, 383, 71, 13);
@@ -101,7 +127,7 @@ public class FlashCardBuilder {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				new FlashCardBuilder();
+				new FlashCardBuilder(records);
 			}
 		});
 		

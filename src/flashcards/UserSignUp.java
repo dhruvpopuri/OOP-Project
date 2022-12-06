@@ -11,8 +11,13 @@ public class UserSignUp {
     private final JTextField textField;
     private final JTextField textField_1;
     private final JPasswordField textField_2;
+    
+    public static Records records;
 
-    public UserSignUp() {
+    public UserSignUp(Records records) {
+
+        UserSignUp.records = records;
+
         JFrame userSignup = new JFrame("User Login");
         userSignup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         userSignup.setSize(400, 500);
@@ -52,7 +57,7 @@ public class UserSignUp {
                 String email = textField_1.getText();
                 String password = String.valueOf(textField_2.getPassword());
                 addUser(username, password, email);
-                new HomeScreen();
+                new HomeScreen(records);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -74,6 +79,10 @@ public class UserSignUp {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(UserSignUp::new);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+               public void run() {
+                   new UserSignUp(records);
+           }});
     }
 }
