@@ -32,7 +32,7 @@ public class User implements java.io.Serializable {
     }
 
     public void createCard(String cardName, int cardType, int categoryId) {
-        Card card = new Card(cardName, this, false, records.getCategory(categoryId), records);
+        Card card = new Card(cardName, this, false, records.getCategory(categoryId), null, records);
         cardsOwnedByUser.add(card);
         records.addCard(card);
     }

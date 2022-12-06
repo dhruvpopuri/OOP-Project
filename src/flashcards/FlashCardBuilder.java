@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import flashcards.cards.Card;
+import flashcards.cards.CardType;
 import flashcards.cards.fillInTheBlank;
 
 import java.awt.event.ActionEvent;
@@ -19,6 +20,8 @@ public class FlashCardBuilder {
 	private final JFrame frame;
 	String selectedValue;
     public static Records records;
+    private JTextField textField;
+	public Deck deck;
 	
 	
 	public FlashCardBuilder(Records records){
@@ -41,7 +44,7 @@ public class FlashCardBuilder {
 		answer.setFont(getFont);
 		
 		JScrollPane scrollpane = new JScrollPane(answer);
-		scrollpane.setBounds(11, 208, 363, 162);
+		scrollpane.setBounds(11, 208, 363, 82);
 		scrollpane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollpane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		
@@ -58,8 +61,25 @@ public class FlashCardBuilder {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Category category = new Category(selectedValue, null, records);
-				Card card = new Card(selectedValue, null, false, category, records);
 				if(selectedValue == "Fill in the blanks"){
+					Card card = new Card(selectedValue, null, false, category, CardType.FILL_IN_THE_BLANKS, records);
+					deck.addCard(card);
+
+				}
+				else if(selectedValue == "Multiple choice"){
+					Card card = new Card(selectedValue, null, false, category, CardType.MULTIPLE_CHOICE, records);
+					deck.addCard(card);
+
+				}
+				else if(selectedValue == "One Word"){
+					Card card = new Card(selectedValue, null, false, category, CardType.ONE_WORD, records);
+					deck.addCard(card);
+
+				}
+				else if(selectedValue == "True/False"){
+					Card card = new Card(selectedValue, null, false, category, CardType.TRUE_FALSE, records);
+					deck.addCard(card);
+
 				}
 				
 			}
@@ -71,7 +91,8 @@ public class FlashCardBuilder {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				frame.setVisible(false);
+				new HomeScreen(records);
 			}
 		});
 		homeButton.setBounds(204, 410, 110, 21);
@@ -79,9 +100,9 @@ public class FlashCardBuilder {
 		cardList = new ArrayList<Card>();
 		
 		JLabel qlabel = new JLabel("Question");
-		qlabel.setBounds(173, 5, 40, 13);
+		qlabel.setBounds(153, 10, 91, 13);
 		JLabel alabel = new JLabel("Answer");
-		alabel.setBounds(176, 190, 34, 13);
+		alabel.setBounds(153, 190, 80, 13);
 		mainPanel.setLayout(null);
 		
 		
@@ -119,6 +140,25 @@ public class FlashCardBuilder {
 		JLabel lblNewLabel = new JLabel("Card Type");
 		lblNewLabel.setBounds(21, 383, 71, 13);
 		mainPanel.add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(102, 337, 172, 19);
+		mainPanel.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Deck Name");
+		lblNewLabel_1.setBounds(21, 340, 71, 13);
+		mainPanel.add(lblNewLabel_1);
+		
+		JButton btnCreate = new JButton("Create");
+		btnCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				deck = new Deck(textField.getText(), null, records);
+			}
+		});
+		btnCreate.setBounds(283, 336, 91, 21);
+		mainPanel.add(btnCreate);
 		frame.setSize(400, 500);
 		frame.setVisible(true);
 	}
@@ -133,5 +173,4 @@ public class FlashCardBuilder {
 		
 		
 	}
-
 }
