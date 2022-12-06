@@ -54,30 +54,30 @@ public class FlashCardBuilder {
 
 		scrollpane_question.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		
-		JButton nextButton = new JButton("Next Card");
+		JButton nextButton = new JButton("Save Card");
 		nextButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Category category = new Category(selectedValue, null, records);
-				if(selectedValue == "Fill in the blanks"){
-					Card card = new Card(selectedValue, null, false, category, CardType.FILL_IN_THE_BLANKS, records);
+				Category category = new Category(selectedValue, records.getSessions().getCurrentLoggedInUser(), records);
+				if(selectedValue.equals(new String("Fill in the blanks"))){
+					Card card = new Card(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, CardType.FILL_IN_THE_BLANKS, records);
 					deck.addCard(card);
 
 				}
-				else if(selectedValue == "Multiple choice"){
-					Card card = new Card(selectedValue, null, false, category, CardType.MULTIPLE_CHOICE, records);
+				else if(selectedValue.equals(new String("Multiple choice"))){
+					Card card = new Card(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, CardType.MULTIPLE_CHOICE, records);
 					deck.addCard(card);
 
 				}
-				else if(selectedValue == "One Word"){
-					Card card = new Card(selectedValue, null, false, category, CardType.ONE_WORD, records);
+				else if(selectedValue.equals(new String("One Word"))){
+					Card card = new Card(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, CardType.ONE_WORD, records);
 					deck.addCard(card);
 
 				}
-				else if(selectedValue == "True/False"){
-					Card card = new Card(selectedValue, null, false, category, CardType.TRUE_FALSE, records);
+				else if(selectedValue.equals(new String("True/False"))){
+					Card card = new Card(selectedValue, records.getSessions().getCurrentLoggedInUser(), false, category, CardType.TRUE_FALSE, records);
 					deck.addCard(card);
 
 				}
@@ -142,7 +142,8 @@ public class FlashCardBuilder {
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				deck = new Deck(textField.getText(), null, records);
+				deck = new Deck(textField.getText(), records.getSessions().getCurrentLoggedInUser(), records);
+				System.out.println("created new deck");
 			}
 		});
 		btnCreate.setBounds(283, 336, 91, 21);

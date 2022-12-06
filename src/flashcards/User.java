@@ -28,8 +28,10 @@ public class User implements java.io.Serializable {
         this.id = nextId;
         this.records = records;
         nextId++;
+        this.numCardsSeenPerDay = new HashMap<String, Integer>();
         cardsOwnedByUser = new ArrayList<>();
         cardsPerDay = new HashMap<>();
+        decks = new ArrayList<Deck>();
         records.addUser(this);
 
         // Records.saveToDB(records);
@@ -110,6 +112,10 @@ public class User implements java.io.Serializable {
 
     public ArrayList<Deck> getUserDecks() {
         return this.decks;
+    }
+
+    public void addDeck(Deck d) {
+        this.decks.add(d);
     }
 
     public String getUsername() {
